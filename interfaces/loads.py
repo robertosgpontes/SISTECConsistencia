@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from pandas import DataFrame
-from models import CursoCollections
+from models import CursoCollection
 
 
 class LoadCursoInterface(ABC):
 
     @abstractmethod
-    def load(df: DataFrame) -> CursoCollections:
+    def load(df: DataFrame) -> CursoCollection:
         pass

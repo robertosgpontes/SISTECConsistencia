@@ -1,10 +1,17 @@
 import pandas as pd
 
-from models.CursoCollections import CursoCollections
+from consistency_rules.PNP2020 import CursoConsistencyRules
+from models.CursoCollection import CursoCollection
 from utils.LoadCurso import LoadCurso
 
-arq_campus_if = pd.read_excel('dataset/dados_if.xlsx', skiprows=[0])
+sistec = pd.read_excel('dataset/dados_if.xlsx', skiprows=[0])
 
-a = LoadCurso.load(arq_campus_if)
+cursos = LoadCurso.load(sistec)
 
-print(a.test)
+curso_consistencia = CursoConsistencyRules(cursos)
+
+cursos_com_nome_improprio = CursoCollection(curso_consistencia.cursosNomeImproprio())
+
+
+print(len(cursos))
+print(len(cursos_com_nome_improprio))

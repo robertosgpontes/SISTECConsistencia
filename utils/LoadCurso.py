@@ -5,21 +5,21 @@ from interfaces.loads import LoadCursoInterface
 from pandas import DataFrame
 
 from models.Curso import Curso
-from models.CursoCollections import CursoCollections
+from models.CursoCollection import CursoCollection
 
 
 class LoadCurso(LoadCursoInterface, ABC):
 
     @staticmethod
-    def load(df: DataFrame) -> CursoCollections:
-        curso_collection = CursoCollections()
+    def load(df: DataFrame) -> CursoCollection:
+        curso_collection = CursoCollection()
         for curso in LoadCurso.__prepare_data(df=df).values:
             if curso[8] == 'SIM':
                 eh_experimental = True
             else:
                 eh_experimental = False
 
-            curso_collection.add(
+            curso_collection.append(
                 Curso(
                     descricao_eixo_tecnologico=curso[0],
                     codigo=curso[1],
